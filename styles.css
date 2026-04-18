@@ -851,19 +851,20 @@ p {
     font-size: 0.875rem;
 }
 
-/* Destination backgrounds with gradients as placeholders */
+/* Destination backgrounds */
 .destination-card.paris {
-    background: linear-gradient(135deg, #2C3E50 0%, #4CA1AF 100%);
+    background: url('assets/cities/paris.jpg') center/cover no-repeat;
 }
 
 .destination-card.tokyo {
-    background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+    background: url('assets/cities/tokyo.jpg') center/cover no-repeat;
 }
 
 .destination-card.santorini {
-    background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 100%);
+    background: url('assets/cities/santorini.jpg') center/cover no-repeat;
 }
 
+/* Placeholder gradients for cities without photos yet */
 .destination-card.barcelona {
     background: linear-gradient(135deg, #F2994A 0%, #F2C94C 100%);
 }
