@@ -864,21 +864,20 @@ p {
     background: url('assets/cities/santorini.jpg') center/cover no-repeat;
 }
 
-/* Placeholder gradients for cities without photos yet */
 .destination-card.barcelona {
-    background: linear-gradient(135deg, #F2994A 0%, #F2C94C 100%);
+    background: url('assets/cities/barcelona.jpg') center/cover no-repeat;
 }
 
 .destination-card.london {
-    background: linear-gradient(135deg, #4B6584 0%, #778CA3 100%);
+    background: url('assets/cities/london.jpg') center/cover no-repeat;
 }
 
 .destination-card.milan {
-    background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+    background: url('assets/cities/milan.jpg') center/cover no-repeat;
 }
 
 .destination-card.florence {
-    background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
+    background: url('assets/cities/florence.jpg') center/cover no-repeat;
 }
 
 .destinations-footer {
