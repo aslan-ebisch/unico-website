@@ -388,12 +388,12 @@
             globe.rotation.x = 0.3; // Slight tilt like Earth
             scene.add(globe);
 
-            // Inner solid sphere for depth
+            // Inner solid sphere - light green for land
             const innerGeometry = new THREE.SphereGeometry(0.98, 32, 32);
             const innerMaterial = new THREE.MeshBasicMaterial({
-                color: 0x0a1628,
+                color: 0x90C695,
                 transparent: true,
-                opacity: 0.9
+                opacity: 0.95
             });
             const innerSphere = new THREE.Mesh(innerGeometry, innerMaterial);
             innerSphere.rotation.x = 0.3; // Match globe tilt
