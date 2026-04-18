@@ -323,23 +323,7 @@
                 <p>Discover curated fashion across the globe's most stylish cities.</p>
             </div>
             <div class="globe-showcase">
-                <div class="globe-container">
-                    <div class="globe-3d">
-                        <div class="globe-sphere">
-                            <div class="globe-grid"></div>
-                            <div class="globe-grid grid-2"></div>
-                            <div class="globe-grid grid-3"></div>
-                        </div>
-                        <!-- Pin points -->
-                        <div class="globe-pin pin-paris"></div>
-                        <div class="globe-pin pin-tokyo"></div>
-                        <div class="globe-pin pin-milan"></div>
-                        <div class="globe-pin pin-barcelona"></div>
-                        <div class="globe-pin pin-london"></div>
-                        <div class="globe-pin pin-santorini"></div>
-                        <div class="globe-pin pin-florence"></div>
-                    </div>
-                </div>
+                <canvas id="globe-canvas"></canvas>
                 <!-- Floating captions -->
                 <div class="globe-captions">
                     <div class="caption caption-1">
@@ -374,6 +358,112 @@
             </div>
         </div>
     </section>
+
+    <!-- Three.js for 3D Globe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 3D Globe with Three.js
+        (function() {
+            const canvas = document.getElementById('globe-canvas');
+            if (!canvas) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+            camera.position.z = 3;
+
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(450, 450);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Create wireframe globe
+            const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
+            const wireframeMaterial = new THREE.MeshBasicMaterial({
+                color: 0x00BCD4,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            const globe = new THREE.Mesh(globeGeometry, wireframeMaterial);
+            scene.add(globe);
+
+            // Inner solid sphere for depth
+            const innerGeometry = new THREE.SphereGeometry(0.98, 32, 32);
+            const innerMaterial = new THREE.MeshBasicMaterial({
+                color: 0x0a1628,
+                transparent: true,
+                opacity: 0.9
+            });
+            const innerSphere = new THREE.Mesh(innerGeometry, innerMaterial);
+            scene.add(innerSphere);
+
+            // City coordinates (lat, lon)
+            const cities = [
+                { name: 'Paris', lat: 48.8566, lon: 2.3522 },
+                { name: 'Tokyo', lat: 35.6762, lon: 139.6503 },
+                { name: 'Milan', lat: 45.4642, lon: 9.1900 },
+                { name: 'Barcelona', lat: 41.3851, lon: 2.1734 },
+                { name: 'London', lat: 51.5074, lon: -0.1278 },
+                { name: 'Santorini', lat: 36.3932, lon: 25.4615 },
+                { name: 'Florence', lat: 43.7696, lon: 11.2558 }
+            ];
+
+            // Convert lat/lon to 3D position
+            function latLonToVector3(lat, lon, radius) {
+                const phi = (90 - lat) * (Math.PI / 180);
+                const theta = (lon + 180) * (Math.PI / 180);
+                const x = -radius * Math.sin(phi) * Math.cos(theta);
+                const y = radius * Math.cos(phi);
+                const z = radius * Math.sin(phi) * Math.sin(theta);
+                return new THREE.Vector3(x, y, z);
+            }
+
+            // Add red pins for each city
+            cities.forEach(city => {
+                const position = latLonToVector3(city.lat, city.lon, 1.02);
+
+                // Pin head (sphere)
+                const pinGeometry = new THREE.SphereGeometry(0.04, 16, 16);
+                const pinMaterial = new THREE.MeshBasicMaterial({ color: 0xff3333 });
+                const pin = new THREE.Mesh(pinGeometry, pinMaterial);
+                pin.position.copy(position);
+                scene.add(pin);
+
+                // Glow effect
+                const glowGeometry = new THREE.SphereGeometry(0.06, 16, 16);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xff0000,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                glow.position.copy(position);
+                scene.add(glow);
+            });
+
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                globe.rotation.y += 0.003;
+                innerSphere.rotation.y += 0.003;
+
+                // Rotate pins with globe
+                scene.children.forEach(child => {
+                    if (child !== globe && child !== innerSphere) {
+                        child.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.003);
+                    }
+                });
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                const size = Math.min(450, window.innerWidth - 40);
+                renderer.setSize(size, size);
+            });
+        })();
+    </script>
 
     <!-- CTA Section -->
     <section id="download" class="cta-section">
