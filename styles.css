@@ -419,6 +419,15 @@ p {
 .phone-center {
     transform: scale(1.1);
     z-index: 2;
+    background: none;
+    padding: 0;
+}
+
+.hero-screenshot {
+    width: 200px;
+    height: auto;
+    border-radius: 36px;
+    box-shadow: var(--shadow-lg);
 }
 
 .mock-globe {
