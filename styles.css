@@ -915,58 +915,215 @@ p {
     font-size: 0.875rem;
 }
 
-/* ===== Screenshots Section ===== */
-.screenshots-section {
+/* ===== Globe Showcase Section ===== */
+.globe-showcase-section {
     padding: var(--space-4xl) 0;
-    background: var(--light);
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
     overflow: hidden;
 }
 
-.screenshots-carousel {
+.globe-showcase-section .section-header h2,
+.globe-showcase-section .section-header p,
+.globe-showcase-section .section-label {
+    color: var(--white);
+}
+
+.globe-showcase-section .section-header p {
+    opacity: 0.7;
+}
+
+.globe-showcase {
     display: flex;
-    gap: var(--space-lg);
-    overflow-x: auto;
-    padding: var(--space-lg) 0;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
-
-.screenshots-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.screenshot-placeholder {
-    flex-shrink: 0;
-    width: 220px;
-    height: 440px;
-    background: var(--dark);
-    border-radius: 30px;
-    padding: 8px;
-    scroll-snap-align: center;
-}
-
-.screenshot-placeholder .placeholder-content {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, var(--cyan-pale) 0%, var(--white) 100%);
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: var(--space-lg);
+    position: relative;
+    min-height: 500px;
+    margin-top: var(--space-xl);
 }
 
-.placeholder-content span {
+.globe-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    perspective: 1000px;
+}
+
+.globe-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: globeRotate 20s linear infinite;
+}
+
+@keyframes globeRotate {
+    from { transform: rotateY(0deg) rotateX(-10deg); }
+    to { transform: rotateY(360deg) rotateX(-10deg); }
+}
+
+.globe-sphere {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1a3a5c 0%, #0a1628 100%);
+    box-shadow:
+        inset -30px -30px 60px rgba(0, 0, 0, 0.5),
+        inset 20px 20px 40px rgba(0, 188, 212, 0.1),
+        0 0 60px rgba(0, 188, 212, 0.3);
+}
+
+.globe-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 188, 212, 0.4);
+}
+
+.globe-grid::before,
+.globe-grid::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.globe-grid::before {
+    width: 100%;
+    height: 60%;
+    top: 20%;
+    left: 0;
+}
+
+.globe-grid::after {
+    width: 60%;
+    height: 100%;
+    top: 0;
+    left: 20%;
+}
+
+.globe-grid.grid-2 {
+    transform: rotateY(60deg);
+}
+
+.globe-grid.grid-3 {
+    transform: rotateY(120deg);
+}
+
+/* Latitude lines */
+.globe-sphere::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 188, 212, 0.3);
+    top: 50%;
+    left: 0;
+    box-shadow:
+        0 -60px 0 rgba(0, 188, 212, 0.2),
+        0 -120px 0 rgba(0, 188, 212, 0.15),
+        0 60px 0 rgba(0, 188, 212, 0.2),
+        0 120px 0 rgba(0, 188, 212, 0.15);
+}
+
+/* Globe pins */
+.globe-pin {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, #ff5555 0%, #cc0000 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.3);
+    animation: pinPulse 2s ease-in-out infinite;
+}
+
+@keyframes pinPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+.pin-paris { top: 30%; left: 52%; animation-delay: 0s; }
+.pin-tokyo { top: 35%; left: 85%; animation-delay: 0.3s; }
+.pin-milan { top: 35%; left: 54%; animation-delay: 0.6s; }
+.pin-barcelona { top: 38%; left: 48%; animation-delay: 0.9s; }
+.pin-london { top: 28%; left: 50%; animation-delay: 1.2s; }
+.pin-santorini { top: 40%; left: 58%; animation-delay: 1.5s; }
+.pin-florence { top: 36%; left: 55%; animation-delay: 1.8s; }
+
+/* Floating captions */
+.globe-captions {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.caption {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    animation: captionFade 21s ease-in-out infinite;
+}
+
+.caption-city {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: var(--dark);
-    margin-bottom: var(--space-xs);
+    color: var(--white);
+    margin-bottom: 4px;
 }
 
-.placeholder-content p {
-    font-size: 0.75rem;
-    color: var(--gray-light);
+.caption-text {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes captionFade {
+    0%, 10% { opacity: 0; transform: translateY(10px); }
+    12%, 18% { opacity: 1; transform: translateY(0); }
+    20%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.caption-1 { top: 15%; left: 5%; animation-delay: 0s; }
+.caption-2 { top: 25%; right: 5%; animation-delay: 3s; }
+.caption-3 { bottom: 30%; left: 3%; animation-delay: 6s; }
+.caption-4 { top: 20%; right: 8%; animation-delay: 9s; }
+.caption-5 { bottom: 20%; right: 5%; animation-delay: 12s; }
+.caption-6 { top: 40%; left: 2%; animation-delay: 15s; }
+.caption-7 { bottom: 15%; left: 8%; animation-delay: 18s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .globe-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    .globe-showcase {
+        min-height: 400px;
+    }
+
+    .caption {
+        padding: 8px 14px;
+    }
+
+    .caption-city {
+        font-size: 1rem;
+    }
+
+    .caption-text {
+        font-size: 0.7rem;
+    }
 }
 
 /* ===== CTA Section ===== */
