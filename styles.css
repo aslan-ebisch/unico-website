@@ -961,27 +961,30 @@ p {
     position: absolute;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 20, 40, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 16px 24px;
+    border-radius: 14px;
+    border: 2px solid var(--cyan-primary);
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.3), 0 4px 20px rgba(0, 0, 0, 0.4);
     opacity: 0;
     animation: captionFade 21s ease-in-out infinite;
 }
 
 .caption-city {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 4px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cyan-light);
+    margin-bottom: 6px;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
 }
 
 .caption-text {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
 }
 
 @keyframes captionFade {
