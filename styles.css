@@ -307,11 +307,11 @@ p {
 
 .pin {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    background: var(--cyan-primary);
+    width: 14px;
+    height: 14px;
+    background: #00E5FF;
     border-radius: 50%;
-    box-shadow: 0 0 20px var(--cyan-primary);
+    box-shadow: 0 0 20px #00E5FF, 0 0 40px #00E5FF, 0 0 60px rgba(0, 229, 255, 0.5);
 }
 
 .pin::before {
@@ -320,11 +320,12 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    border: 2px solid var(--cyan-primary);
+    width: 28px;
+    height: 28px;
+    border: 2px solid #00E5FF;
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px #00E5FF;
 }
 
 .pin-1 { top: 20%; left: 30%; animation-delay: 0s; }
