@@ -191,7 +191,7 @@ p {
 }
 
 .logo-img {
-    height: 108px;
+    height: 72px;
     width: auto;
 }
 
@@ -249,7 +249,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-4xl) var(--space-lg) 120px;
+    padding: 140px var(--space-lg) 120px;
     overflow: visible;
     background: var(--gradient-hero);
 }
