@@ -191,8 +191,9 @@ p {
 }
 
 .logo-img {
-    height: 48px;
+    height: 64px;
     width: auto;
+    margin: -12px 0;
 }
 
 .nav-links {
