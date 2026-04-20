@@ -421,6 +421,16 @@ p {
     margin-top: var(--space-xs);
 }
 
+.instagram-link {
+    color: var(--cyan-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.instagram-link:hover {
+    text-decoration: underline;
+}
+
 .hero-phones {
     display: flex;
     justify-content: center;
@@ -1115,6 +1125,34 @@ p {
 .footer-brand p {
     color: var(--gray-light);
     max-width: 300px;
+}
+
+.social-links {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    transition: all var(--transition-fast);
+}
+
+.social-link:hover {
+    background: var(--cyan-primary);
+    transform: scale(1.1);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
 }
 
 .footer-links {
